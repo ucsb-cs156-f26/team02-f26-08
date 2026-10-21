@@ -9,18 +9,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -53,6 +50,8 @@ public class SecurityConfig {
 
   @Value("${app.admin.emails}")
   private final List<String> adminEmails = new ArrayList<>();
+
+  private final String adminGroup = "";
 
   @Autowired UserRepository userRepository;
 
@@ -95,7 +94,8 @@ public class SecurityConfig {
     return web -> web.ignoring().requestMatchers(antMatcher("/h2-console/**"));
   }
 
-  private GrantedAuthoritiesMapper userAuthoritiesMapper() {
+  @Bean("PrimaryUserAuthoritiesMapper")
+  GrantedAuthoritiesMapper userAuthoritiesMapper() {
     return (authorities) -> {
       Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
       log.info("********** authorities={}", authorities);
@@ -111,8 +111,15 @@ public class SecurityConfig {
               mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
               String email = (String) userAttributes.get("email");
+
               if (getAdmin(email)) {
                 mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+              }
+
+              if (userAttributes.get("roles") instanceof List<?> roles) {
+                if (roles.contains("admin")) {
+                  mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                }
               }
 
               if (email.endsWith("@ucsb.edu")) {
@@ -121,6 +128,32 @@ public class SecurityConfig {
             }
           });
       log.info("********** mappedAuthorities={}", mappedAuthorities);
+      return mappedAuthorities;
+    };
+  }
+
+  @Profile("QA")
+  @Primary
+  @Bean
+  GrantedAuthoritiesMapper groupMappedUserAuthoritiesMapper(
+      GrantedAuthoritiesMapper delegate, @Value("${app.admin.group:-}") String adminGroup) {
+
+    return (authorities) -> {
+      System.out.println("adminGroup = " + adminGroup);
+      Collection<? extends GrantedAuthority> delegatedAuthorities =
+          delegate.mapAuthorities(authorities);
+      Set<GrantedAuthority> mappedAuthorities = new HashSet<>(delegatedAuthorities);
+      authorities.forEach(
+          (authority) -> {
+            if (authority instanceof OAuth2UserAuthority oauth2Authority) {
+              Map<String, Object> userAttributes = oauth2Authority.getAttributes();
+              if (userAttributes.get("groups") instanceof List<?> groups) {
+                if (groups.contains(adminGroup)) {
+                  mappedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                }
+              }
+            }
+          });
       return mappedAuthorities;
     };
   }

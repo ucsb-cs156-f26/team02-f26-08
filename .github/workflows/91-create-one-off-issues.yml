@@ -76,7 +76,7 @@ jobs:
             - [ ] Github Pages is active, using the `gh-pages` branch and the root directory
             - [ ] The main page of the repo has a link to the Github Pages site in the right side bar
             - [ ] The links on the Github Pages site work properly.
-            - [ ] A `PROJECT_CHROMATIC_TOKEN` value is set correctly for the team's repo (this only needs to be done once)
+            - [ ] A `PROJECT_CHROMATIC_TOKEN` value is set correctly for the team's repo (this only needs to be done once. Instructions are here: [`https://ucsb-cs156.github.io/topics/chromatic/`](https://ucsb-cs156.github.io/topics/chromatic/))
 
             # Details
 

@@ -150,7 +150,7 @@ jobs:
                   `src/main/java/edu/ucsb/cs156/example/entities` 
                   and copy it into your ${{env.ASSIGNMENT}} project in the same directory.
             - [ ] Do the same for  `${{env.name}}Repository.java` from the directory
-                  `src/main/java/edu/ucsb/cs156/example/repositorires`
+                  `src/main/java/edu/ucsb/cs156/example/repositories`
             - [ ] Do the same for `${{env.name}}Controller.java` from the directory
                   `src/main/java/edu/ucsb/cs156/example/controllers`
             - [ ] Do the same for `${{env.name}}ControllerTests.java` from the directory

@@ -1,33 +1,31 @@
-FROM ubuntu:22.04
+FROM maven:3.9.16-eclipse-temurin-25-noble AS builder
 
-# Set environment variables to avoid interactive prompts during installation
-ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /home/app
 
-RUN apt-get update 
-RUN apt-get install -y openjdk-25-jdk
-RUN apt-get install -y  curl  
-RUN apt-get install -y  bash  
-RUN apt-get install -y maven  
-RUN apt-get install -y  python3 
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
+# Copy of pom & package is a cheap hack to have npm and maven dependencies already loaded;
+# Most of the time, they're unlikely to change, so tying them to the file copies allows us not to
+# have to reload them constantly.
 
-# Set JAVA_HOME environment variable
-ENV JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
-ENV PATH="$JAVA_HOME/bin:$PATH"
+COPY pom.xml .
 
-# Verify installation
-RUN java -version
+RUN --mount=type=cache,target=/root/.m2/repository mvn dependency:go-offline -B
+
+COPY frontend/package-lock.json frontend/package.json frontend/
+
+RUN --mount=type=cache,target=/root/.m2/repository --mount=type=cache,target=/root/.npm mvn -Pproduction com.github.eirslett:frontend-maven-plugin:install-node-and-npm@install-node-and-npm com.github.eirslett:frontend-maven-plugin:npm@npm-install -B
+
+COPY . .
+
+RUN --mount=type=cache,target=/root/.m2/repository mvn -Pproduction -DskipTests -Dcache.use=true -Dgcf.skip=true package -B
+
+FROM eclipse-temurin:25-jre-alpine
 
 WORKDIR /app
 
-# Verify installation
-RUN java -version
-RUN curl --version
+RUN apk add bash curl
 
-COPY . /home/app
+COPY --from=builder /home/app/startup.sh .
 
-RUN mvn -B -Pproduction -DskipTests -f /home/app/pom.xml clean package
+COPY --from=builder /home/app/target/team01-1.0.0.jar .
 
-RUN ["chmod", "+x", "/home/app/startup.sh"]
-ENTRYPOINT ["/home/app/startup.sh","/home/app/target/team01-1.0.0.jar"]
+ENTRYPOINT ["./startup.sh", "team01-1.0.0.jar"]
