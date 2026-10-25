@@ -1,5 +1,3 @@
-import { getDefaultNormalizer } from "@testing-library/react";
-
 const recommendationRequestFixtures = {
   oneRecommendationRequest: {
     id: 1,
