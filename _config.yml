@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-CopyBackend","number":183,"title":"Copied team01 Recommendation Request CRUD Files to team02","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/183"}]
+pull_requests: [{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-Fixtures","number":184,"title":"jm - added javascript fixtures for recommendation requests","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/184"},{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-CopyBackend","number":183,"title":"Copied team01 Recommendation Request CRUD Files to team02","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/183"}]
