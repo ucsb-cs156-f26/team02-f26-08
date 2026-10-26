@@ -96,7 +96,7 @@ function RecommendationRequestForm({
           type="datetime-local"
           isInvalid={Boolean(errors.dateRequested)}
           {...register("dateRequested", {
-            required: true,
+            required: "Date requested is required.",
             pattern: isodate_regex,
           })}
         />
@@ -113,7 +113,7 @@ function RecommendationRequestForm({
           type="datetime-local"
           isInvalid={Boolean(errors.dateNeeded)}
           {...register("dateNeeded", {
-            required: true,
+            required: "Date needed is required.",
             pattern: isodate_regex,
           })}
         />
