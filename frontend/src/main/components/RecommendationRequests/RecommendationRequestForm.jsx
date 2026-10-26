@@ -9,7 +9,8 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({ defaultValues: initialContents || {} });
+  } = useForm(
+    { defaultValues: initialContents || {} });
   // Stryker restore all
 
   const navigate = useNavigate();
