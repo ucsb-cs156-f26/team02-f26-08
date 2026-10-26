@@ -2,15 +2,17 @@ import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 
-function RecommendationRequestForm({ initialContents, submitAction, buttonLabel = "Create" })
-{
+function RecommendationRequestForm({
+  initialContents,
+  submitAction,
+  buttonLabel = "Create",
+}) {
   // Stryker disable all
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm(
-    { defaultValues: initialContents || {} });
+  } = useForm({ defaultValues: initialContents || {} });
   // Stryker restore all
 
   const navigate = useNavigate();
@@ -117,6 +119,23 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
         />
         <Form.Control.Feedback type="invalid">
           {errors.dateNeeded?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="done">Done</Form.Label>
+        <Form.Select
+          id="done"
+          data-testid={testIdPrefix + "-done"}
+          isInvalid={Boolean(errors.done)}
+          {...register("done", { required: "Done is required." })}
+        >
+          <option value="">--</option>
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </Form.Select>
+        <Form.Control.Feedback type="invalid">
+          {errors.done?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
