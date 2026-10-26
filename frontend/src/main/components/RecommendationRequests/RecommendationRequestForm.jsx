@@ -47,10 +47,6 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
           isInvalid={Boolean(errors.requesterEmail)}
           {...register("requesterEmail", {
             required: "Requester email is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -104,6 +100,23 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
         />
         <Form.Control.Feedback type="invalid">
           {errors.dateRequested?.message}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="dateNeeded">Date Needed (in UTC)</Form.Label>
+        <Form.Control
+          data-testid={testIdPrefix + "-dateNeeded"}
+          id="dateNeeded"
+          type="datetime-local"
+          isInvalid={Boolean(errors.dateNeeded)}
+          {...register("dateNeeded", {
+            required: true,
+            pattern: isodate_regex,
+          })}
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.dateNeeded?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
