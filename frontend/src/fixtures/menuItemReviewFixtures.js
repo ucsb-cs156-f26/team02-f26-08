@@ -1,5 +1,5 @@
 const menuItemReviewFixtures = {
-  oneReiview: {
+  oneReview: {
     id: 2,
     itemId: 1,
     reviewerEmail: "kyleli@ucsb.edu",
