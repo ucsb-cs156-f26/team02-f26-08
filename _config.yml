@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-UCSBOrganizations-form","number":186,"title":"Add form for UCSBOrganizations table","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/186"}]
+pull_requests: [{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-UCSBOrganizations-table","number":198,"title":"Add UCSBOrganization table component, stories, and test","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/198"},{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-UCSBOrganizations-form","number":186,"title":"Add form for UCSBOrganizations table","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/186"}]
