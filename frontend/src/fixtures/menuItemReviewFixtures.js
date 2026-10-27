@@ -1,4 +1,4 @@
-const reviewFixtures = {
+const menuItemReviewFixtures = {
   oneReiview: {
     id: 2,
     itemId: 1,
