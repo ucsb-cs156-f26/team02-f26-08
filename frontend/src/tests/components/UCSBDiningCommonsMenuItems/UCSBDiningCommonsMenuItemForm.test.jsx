@@ -111,7 +111,10 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     fireEvent.change(stationInput, { target: { value: "a".repeat(31) } });
     fireEvent.click(submitButton);
     await waitFor(() => {
-       expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
-    expect(screen.getByTestId(`${testId}-diningCommonsCode`)).not.toHaveClass("is-invalid"); });
+      expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+      expect(screen.getByTestId(`${testId}-diningCommonsCode`)).not.toHaveClass(
+        "is-invalid",
+      );
+    });
   });
 });
