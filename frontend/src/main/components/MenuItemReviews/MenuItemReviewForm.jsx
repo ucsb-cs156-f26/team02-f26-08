@@ -38,7 +38,7 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="itemId">item id</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-itemId"}
+          // data-testid={testIdPrefix + "-itemId"}
           id="itemId"
           type="number"
           isInvalid={Boolean(errors.itemId)}
@@ -54,7 +54,7 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="reviewerEmail">reviewer email</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-reviewerEmail"}
+          // data-testid={testIdPrefix + "-reviewerEmail"}
           id="reviewerEmail"
           type="text"
           isInvalid={Boolean(errors.reviewerEmail)}
@@ -70,7 +70,7 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="stars">stars</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-stars"}
+          // data-testid={testIdPrefix + "-stars"}
           id="stars"
           type="number"
           isInvalid={Boolean(errors.stars)}
@@ -86,7 +86,7 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="comments">comments</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-comments"}
+          // data-testid={testIdPrefix + "-comments"}
           id="comments"
           type="text"
           isInvalid={Boolean(errors.comments)}
@@ -102,7 +102,7 @@ function MenuItemReviewForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="dateReviewed">Date Reviewed</Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-dateReviewed"}
+          // data-testid={testIdPrefix + "-dateReviewed"}
           id="dateReviewed"
           type="datetime-local" //datetime-local
           isInvalid={Boolean(errors.dateReviewed)}
@@ -115,7 +115,7 @@ function MenuItemReviewForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit">
         {buttonLabel}
       </Button>
       <Button
