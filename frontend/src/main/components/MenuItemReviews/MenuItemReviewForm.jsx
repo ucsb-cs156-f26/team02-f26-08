@@ -7,7 +7,6 @@ function MenuItemReviewForm({
   submitAction,
   buttonLabel = "Create",
 }) {
-
   // Stryker disable all
   const {
     register,

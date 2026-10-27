@@ -2,7 +2,10 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router";
 
 import MenuItemReviewForm from "main/components/MenuItemReviews/MenuItemReviewForm";
-import { _menuItemReviewFixtures, menuItemReviewFixtures } from "fixtures/menuItemReviewFixtures";
+import {
+  _menuItemReviewFixtures,
+  menuItemReviewFixtures,
+} from "fixtures/menuItemReviewFixtures";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -18,7 +21,13 @@ vi.mock("react-router", async () => {
 describe("MenuItemReviewForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["item id", "reviewer email","stars","comments","Date Reviewed"];
+  const expectedHeaders = [
+    "item id",
+    "reviewer email",
+    "stars",
+    "comments",
+    "Date Reviewed",
+  ];
   const testId = "MenuItemReviewForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -42,7 +51,9 @@ describe("MenuItemReviewForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <MenuItemReviewForm initialContents={menuItemReviewFixtures.oneReview} />
+          <MenuItemReviewForm
+            initialContents={menuItemReviewFixtures.oneReview}
+          />
         </Router>
       </QueryClientProvider>,
     );
