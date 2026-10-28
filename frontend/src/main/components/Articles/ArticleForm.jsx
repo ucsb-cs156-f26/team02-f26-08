@@ -25,9 +25,6 @@ function ArticleForm({
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
   // Stryker restore Regex
 
-  // Stryker disable next-line all
-  const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
-
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
       <Row>
@@ -46,26 +43,6 @@ function ArticleForm({
             </Form.Group>
           </Col>
         )}
-
-
-        <Col>
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor="dateAdded">Date (iso format)</Form.Label>
-            <Form.Control
-              data-testid="ArticleForm-dateAdded"
-              id="dateAdded"
-              type="datetime-local"
-              isInvalid={Boolean(errors.dateAdded)}
-              {...register("dateAdded", {
-                required: true,
-                pattern: isodate_regex,
-              })}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.dateAdded && "Date added is required. "}
-            </Form.Control.Feedback>
-          </Form.Group>
-        </Col>
       </Row>
 
       <Row>
@@ -87,6 +64,25 @@ function ArticleForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.title?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+
+       <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="dateAdded">Date (iso format)</Form.Label>
+            <Form.Control
+              data-testid="ArticleForm-dateAdded"
+              id="dateAdded"
+              type="datetime-local"
+              isInvalid={Boolean(errors.dateAdded)}
+              {...register("dateAdded", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.dateAdded && "Date (iso format) is required. "}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>

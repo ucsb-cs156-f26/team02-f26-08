@@ -5,7 +5,7 @@ const articlesFixtures = {
     url: "https://ucsb-cs156.github.io/f26/lab/jpa01.html",
     explanation: "Instructions for assignment jpa01 of CS156 in f26.",
     email: "hzw@ucsb.edu",
-    dateAdded: "2026-10-27T21:25:37.175Z",
+    dateAdded: "2026-10-27T08:00:11",
   },
   threeArticles: [
     {
@@ -14,7 +14,7 @@ const articlesFixtures = {
       url: "https://ucsb-cs156.github.io/f26/lab/jpa02.html",
       explanation: "Instructions for assignment jpa02 of CS156 in f26.",
       email: "hzw@ucsb.edu",
-      dateAdded: "2026-10-27T21:25:37.175Z",
+      dateAdded: "2026-10-27T08:00:00",
     },
     {
       id: 3,
@@ -22,7 +22,7 @@ const articlesFixtures = {
       url: "https://ucsb-cs156.github.io/f26/lab/jpa03.html",
       explanation: "Instructions for assignment jpa03 of CS156 in f26.",
       email: "hzw@ucsb.edu",
-      dateAdded: "2026-10-27T21:25:37.175Z",
+      dateAdded: "2026-10-27T08:00:00",
     },
     {
       id: 4,
@@ -30,7 +30,7 @@ const articlesFixtures = {
       url: "https://ucsb-cs156.github.io/f26/lab/jpa04.html",
       explanation: "Instructions for assignment jpa04 of CS156 in f26.",
       email: "hzw@ucsb.edu",
-      dateAdded: "2026-10-27T21:25:37.175Z",
+      dateAdded: "2026-10-27T08:00:00",
     },
   ],
 };
