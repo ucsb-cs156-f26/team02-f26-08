@@ -8,9 +8,9 @@ import HomePage from "main/pages/HomePage";
 import ProfilePage from "main/pages/ProfilePage";
 import AdminUsersPage from "main/pages/AdminUsersPage";
 
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
-import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
-import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
+import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
+import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
+import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
 
 import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
@@ -19,6 +19,10 @@ import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
+
+import UCSBOrganizationIndexPage from "main/pages/UCSBOrganization/UCSBOrganizationIndexPage";
+import UCSBOrganizationCreatePage from "main/pages/UCSBOrganization/UCSBOrganizationCreatePage";
+import UCSBOrganizationEditPage from "main/pages/UCSBOrganization/UCSBOrganizationEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/useCurrentUser";
 
@@ -60,20 +64,23 @@ function App() {
       )}
       {hasRole(currentUser, "ROLE_USER") && (
         <>
-          <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
+          <Route exact 
+            path="/RECOMMENDATIONREQUESTS"
+            element={<RecommendationRequestsIndexPage />}
+          />
         </>
       )}
       {hasRole(currentUser, "ROLE_ADMIN") && (
         <>
           <Route
             exact
-            path="/ucsbdates/edit/:id"
-            element={<UCSBDatesEditPage />}
+            path="/RECOMMENDATIONREQUESTS/edit/:id"
+            element={<RecommendationRequestsEditPage />}
           />
           <Route
             exact
-            path="/ucsbdates/create"
-            element={<UCSBDatesCreatePage />}
+            path="/RECOMMENDATIONREQUESTS/create"
+            element={<RecommendationRequestsCreatePage />}
           />
         </>
       )}
@@ -112,6 +119,26 @@ function App() {
             exact
             path="/placeholder/create"
             element={<PlaceholderCreatePage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_USER") && (
+        <>
+          <Route
+            path="/ucsborganization"
+            element={<UCSBOrganizationIndexPage />}
+          />
+        </>
+      )}
+      {hasRole(currentUser, "ROLE_ADMIN") && (
+        <>
+          <Route
+            path="/ucsborganization/edit/:id"
+            element={<UCSBOrganizationEditPage />}
+          />
+          <Route
+            path="/ucsborganization/create"
+            element={<UCSBOrganizationCreatePage />}
           />
         </>
       )}
