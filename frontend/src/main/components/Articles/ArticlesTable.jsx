@@ -66,5 +66,7 @@ export default function ArticlesTable({ articles, currentUser }) {
     );
   }
 
-  return <OurTable data={articles} columns={columns} testid={"ArticlesTable"} />;
+  return (
+    <OurTable data={articles} columns={columns} testid={"ArticlesTable"} />
+  );
 }
