@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 function ArticleForm({
   initialContents,
   submitAction,
-  buttonLabel = "Create"
+  buttonLabel = "Create",
 }) {
   // Stryker disable all
   const {
@@ -57,9 +57,9 @@ function ArticleForm({
               {...register("title", {
                 required: "Title is required.",
                 maxLength: {
-                    value: 255,
-                    message: "Max length 255 characters.",
-                }
+                  value: 255,
+                  message: "Max length 255 characters.",
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -68,7 +68,7 @@ function ArticleForm({
           </Form.Group>
         </Col>
 
-       <Col>
+        <Col>
           <Form.Group className="mb-3">
             <Form.Label htmlFor="dateAdded">Date (iso format)</Form.Label>
             <Form.Control
@@ -87,7 +87,7 @@ function ArticleForm({
           </Form.Group>
         </Col>
       </Row>
-    
+
       <Row>
         <Col>
           <Form.Group className="mb-3">
@@ -100,9 +100,9 @@ function ArticleForm({
               {...register("url", {
                 required: "Url is required.",
                 maxLength: {
-                    value: 255,
-                    message: "Max length 255 characters.",
-                }
+                  value: 255,
+                  message: "Max length 255 characters.",
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -111,7 +111,7 @@ function ArticleForm({
           </Form.Group>
         </Col>
       </Row>
-    
+
       <Row>
         <Col>
           <Form.Group className="mb-3">
@@ -124,9 +124,9 @@ function ArticleForm({
               {...register("explanation", {
                 required: "Explanation is required.",
                 maxLength: {
-                    value: 255,
-                    message: "Max length 255 characters.",
-                }
+                  value: 255,
+                  message: "Max length 255 characters.",
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -148,9 +148,9 @@ function ArticleForm({
               {...register("email", {
                 required: "Email is required.",
                 maxLength: {
-                    value: 255,
-                    message: "Max length 255 characters.",
-                }
+                  value: 255,
+                  message: "Max length 255 characters.",
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">

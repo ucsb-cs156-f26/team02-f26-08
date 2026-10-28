@@ -18,9 +18,15 @@ vi.mock("react-router", async () => {
 
 describe("ArticleForm tests", () => {
   const queryClient = new QueryClient();
-  const expectedHeaders = ["Title", "Url", "Explanation", "Email", "Date (iso format)"]
-  const fixtureParams = ["title", "url", "explanation", "email", "dateAdded"]
-  
+  const expectedHeaders = [
+    "Title",
+    "Url",
+    "Explanation",
+    "Email",
+    "Date (iso format)",
+  ];
+  const fixtureParams = ["title", "url", "explanation", "email", "dateAdded"];
+
   test("renders correctly with no initialContents", async () => {
     render(
       <QueryClientProvider client={queryClient}>
@@ -57,7 +63,7 @@ describe("ArticleForm tests", () => {
   });
 
   test("Correct error messsages on missing input", async () => {
-     render(
+    render(
       <QueryClientProvider client={queryClient}>
         <Router>
           <ArticleForm />
@@ -70,7 +76,9 @@ describe("ArticleForm tests", () => {
     fireEvent.click(submitButton);
 
     for (const headerText of expectedHeaders) {
-      expect(await screen.findByText(`${headerText} is required.`)).toBeInTheDocument();
+      expect(
+        await screen.findByText(`${headerText} is required.`),
+      ).toBeInTheDocument();
     }
   });
 
@@ -107,7 +115,9 @@ describe("ArticleForm tests", () => {
     await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
     for (const headerText of expectedHeaders) {
-      expect(screen.queryByText(`${headerText} is required.`)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(`${headerText} is required.`),
+      ).not.toBeInTheDocument();
     }
   });
 
@@ -127,17 +137,21 @@ describe("ArticleForm tests", () => {
       if (expectedHeaders[i] == "Date (iso format)") {
         continue;
       }
-      expect(await screen.findByText(`${expectedHeaders[i]}`)).toBeInTheDocument();
+      expect(
+        await screen.findByText(`${expectedHeaders[i]}`),
+      ).toBeInTheDocument();
       const Input = screen.getByTestId(`ArticleForm-${fixtureParams[i]}`);
       fireEvent.change(Input, { target: { value: "a".repeat(256) } });
       fireEvent.click(submitButton);
 
       await waitFor(() => {
-      expect(screen.getByText(/Max length 255 characters./)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Max length 255 characters./),
+        ).toBeInTheDocument();
       });
-      fireEvent.change(Input, { target: { value: ""} });
+      fireEvent.change(Input, { target: { value: "" } });
       fireEvent.click(submitButton);
-    } 
+    }
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
