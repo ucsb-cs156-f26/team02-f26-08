@@ -156,4 +156,45 @@ describe("HelpRequestForm tests", () => {
     fireEvent.click(cancelButton);
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
   });
+
+  test("Requester Email max length validation", async () => {
+    render(
+      <Router>
+        <HelpRequestForm />
+      </Router>,
+    );
+
+    const requesterEmailField = screen.getByTestId(
+      "HelpRequestForm-requesterEmail",
+    );
+    const submitButton = screen.getByTestId("HelpRequestForm-submit");
+
+    fireEvent.change(requesterEmailField, {
+      target: { value: "a".repeat(250) + "@b.com" },
+    });
+
+    fireEvent.click(submitButton);
+
+    await screen.findByText(/Max length 255 characters/);
+
+    expect(
+      screen.getByText(/Max length 255 characters/),
+    ).toBeInTheDocument();
+  });
+
+  test("Solved checkbox works correctly", async () => {
+    render(
+      <Router>
+        <HelpRequestForm />
+      </Router>,
+    );
+
+    const solvedField = screen.getByTestId("HelpRequestForm-solved");
+
+    expect(solvedField).not.toBeChecked();
+
+    fireEvent.click(solvedField);
+
+    expect(solvedField).toBeChecked();
+  });
 });
