@@ -177,9 +177,7 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Max length 255 characters/);
 
-    expect(
-      screen.getByText(/Max length 255 characters/),
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
   });
 
   test("Solved checkbox works correctly", async () => {
