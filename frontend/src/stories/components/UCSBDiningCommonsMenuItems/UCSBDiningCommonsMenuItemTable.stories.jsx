@@ -37,7 +37,7 @@ ThreeItemsAdminUser.args = {
 
 ThreeItemsAdminUser.parameters = {
   msw: [
-    http.delete("/api/ucsbDiningCommonsMenuItems", () => {
+    http.delete("/api/ucsbdiningcommonsmenuitems", () => {
       return HttpResponse.json(
         { message: "UCSBDiningCommonsMenuItem deleted successfully" },
         { status: 200 },
