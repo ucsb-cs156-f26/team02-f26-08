@@ -71,7 +71,7 @@ function App() {
           />
           <Route
             exact
-            path="/ucsbdates/create"
+            path="/menuitemreviews/create"
             element={<MenuItemReviewCreatePage />}
           />
         </>

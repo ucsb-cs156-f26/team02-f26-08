@@ -1,7 +1,7 @@
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 
 export default function MenuItemReviewCreatePage() {
-  // Stryker disable all : menuItemReview for future implementation
+  // Stryker disable all : menuitemreview for future implementation
   return (
     <BasicLayout>
       <div className="pt-2">
