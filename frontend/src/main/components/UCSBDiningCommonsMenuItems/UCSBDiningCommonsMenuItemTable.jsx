@@ -17,7 +17,7 @@ export default function UCSBDiningCommonsMenuItemTable({
   const navigate = useNavigate();
 
   const editCallback = (cell) => {
-    navigate(`/ucsbDiningCommonsMenuItems/edit/${cell.row.original.id}`);
+    navigate(`/ucsbdiningcommonsmenuitems/edit/${cell.row.original.id}`);
   };
 
   // Stryker disable all : hard to test for query caching
@@ -25,7 +25,7 @@ export default function UCSBDiningCommonsMenuItemTable({
   const deleteMutation = useBackendMutation(
     cellToAxiosParamsDelete,
     { onSuccess: onDeleteSuccess },
-    ["/api/ucsbDiningCommonsMenuItems/all"],
+    ["/api/ucsbdiningcommonsmenuitems/all"],
   );
   // Stryker restore all
 

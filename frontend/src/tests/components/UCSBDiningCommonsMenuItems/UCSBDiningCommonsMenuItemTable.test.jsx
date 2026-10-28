@@ -193,7 +193,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
       expect(mockedNavigate).toHaveBeenCalledWith(
-        "/ucsbDiningCommonsMenuItems/edit/3",
+        "/ucsbdiningcommonsmenuitems/edit/3",
       ),
     );
   });
@@ -204,7 +204,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/ucsbDiningCommonsMenuItems")
+      .onDelete("/api/ucsbdiningcommonsmenuitems")
       .reply(200, { message: "UCSBDiningCommonsMenuItem deleted" });
 
     // act - render the component
