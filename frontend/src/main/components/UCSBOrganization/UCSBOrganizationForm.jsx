@@ -1,6 +1,6 @@
-import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { Button, Form } from "react-bootstrap";
 
 function UCSBOrganizationForm({
   initialContents,
