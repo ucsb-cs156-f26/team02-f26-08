@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router";
 
-import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemIndexPage";
-import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemCreatePage";
-import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemEditPage";
+// import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemIndexPage";
+// import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemCreatePage";
+// import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItems/UCSBDiningCommonsMenuItemEditPage";
 
 import HomePage from "main/pages/HomePage";
 import ProfilePage from "main/pages/ProfilePage";
 import AdminUsersPage from "main/pages/AdminUsersPage";
 
-import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
-import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
-import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
+import RecommendationRequestsIndexPage from "main/pages/RecommendationRequests/RecommendationRequestsIndexPage";
+import RecommendationRequestsCreatePage from "main/pages/RecommendationRequests/RecommendationRequestsCreatePage";
+import RecommendationRequestsEditPage from "main/pages/RecommendationRequests/RecommendationRequestsEditPage";
 
 import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
@@ -43,8 +43,8 @@ function App() {
         <>
           <Route
             exact
-            path="/ucsbdiningcommonsmenuitems"
-            element={<UCSBDiningCommonsMenuItemIndexPage />}
+            path="/RECOMMENDATIONREQUESTS"
+            element={<RecommendationRequestsIndexPage />}
           />
         </>
       )}
@@ -52,32 +52,13 @@ function App() {
         <>
           <Route
             exact
-            path="/ucsbdiningcommonsmenuitems/edit/:id"
-            element={<UCSBDiningCommonsMenuItemEditPage />}
+            path="/RECOMMENDATIONREQUESTS/edit/:id"
+            element={<RecommendationRequestsEditPage />}
           />
           <Route
             exact
-            path="/ucsbdiningcommonsmenuitems/create"
-            element={<UCSBDiningCommonsMenuItemCreatePage />}
-          />
-        </>
-      )}
-      {hasRole(currentUser, "ROLE_USER") && (
-        <>
-          <Route exact path="/ucsbdates" element={<UCSBDatesIndexPage />} />
-        </>
-      )}
-      {hasRole(currentUser, "ROLE_ADMIN") && (
-        <>
-          <Route
-            exact
-            path="/ucsbdates/edit/:id"
-            element={<UCSBDatesEditPage />}
-          />
-          <Route
-            exact
-            path="/ucsbdates/create"
-            element={<UCSBDatesCreatePage />}
+            path="/RECOMMENDATIONREQUESTS/create"
+            element={<RecommendationRequestsCreatePage />}
           />
         </>
       )}
