@@ -13,7 +13,7 @@ export default function MenuItemReviewCreatePage({ storybook = false }) {
       reviewerEmail: review.reviewerEmail,
       stars: review.stars,
       comments: review.comments,
-      dateReviewed: review.dateReviewed
+      dateReviewed: review.dateReviewed,
     },
   });
 
