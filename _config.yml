@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-CopyPlaceholders","number":205,"title":"jm - copy placeholders for index, edit, and create for rec req","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/205"}]
+pull_requests: [{"author":{"id":"U_kgDOBrvATA","is_bot":false,"login":"s-kyli","name":"vq37"},"headRefName":"MIR-table-component","number":206,"title":"add MenuItemReviewTable, tests and stories","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/206"},{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-CopyPlaceholders","number":205,"title":"jm - copy placeholders for index, edit, and create for rec req","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/205"}]
