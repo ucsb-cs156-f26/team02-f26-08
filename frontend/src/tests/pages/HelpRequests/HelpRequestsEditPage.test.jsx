@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HelpRequestEditPage from "main/pages/HelpRequests/HelpRequestsEditPage";
+import HelpRequestsEditPage from "main/pages/HelpRequests/HelpRequestsEditPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
 
@@ -9,7 +9,7 @@ import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import { expect } from "vitest";
 
-describe("HelpRequestEditPage tests", () => {
+describe("HelpRequestsEditPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
 
   const setupUserOnly = () => {
@@ -24,22 +24,23 @@ describe("HelpRequestEditPage tests", () => {
   };
 
   const queryClient = new QueryClient();
+
   test("Renders expected content", async () => {
     // arrange
-
     setupUserOnly();
 
     // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestEditPage />
+          <HelpRequestsEditPage />
         </MemoryRouter>
       </QueryClientProvider>,
     );
 
     // assert
     await screen.findByText("Edit page not yet implemented");
+
     expect(
       screen.getByText("Edit page not yet implemented"),
     ).toBeInTheDocument();
