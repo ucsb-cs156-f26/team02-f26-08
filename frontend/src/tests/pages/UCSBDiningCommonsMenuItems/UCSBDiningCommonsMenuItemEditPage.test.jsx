@@ -46,7 +46,9 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsbdiningcommonsmenuitems", { params: { id: 17 } }).timeout();
+      axiosMock
+        .onGet("/api/ucsbdiningcommonsmenuitems", { params: { id: 17 } })
+        .timeout();
     });
 
     afterEach(() => {
@@ -68,7 +70,9 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit UCSBDiningCommonsMenuItem");
-      expect(screen.queryByTestId("UCSBDiningCommonsMenuItem-diningCommonsCode")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("UCSBDiningCommonsMenuItem-diningCommonsCode"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -84,17 +88,19 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsbdiningcommonsmenuitems", { params: { id: 17 } }).reply(200, {
-        id: 17,
-        diningCommonsCode: "Ortega",
-        name: "Chicken Pot Pie",
-        station: "Entree",
-      });
+      axiosMock
+        .onGet("/api/ucsbdiningcommonsmenuitems", { params: { id: 17 } })
+        .reply(200, {
+          id: 17,
+          diningCommonsCode: "Ortega",
+          name: "Chicken Pot Pie",
+          station: "Entree",
+        });
       axiosMock.onPut("/api/ucsbdiningcommonsmenuitems").reply(200, {
         id: "17",
         diningCommonsCode: "Ortega 2",
-      name: "Chicken Pot Pie 2",
-      station: "Entree 2",
+        name: "Chicken Pot Pie 2",
+        station: "Entree 2",
       });
     });
 
@@ -119,10 +125,18 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
       await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
       const idField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-id");
-      const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode");
-      const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
-      const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
-      const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
+      const diningCommonsCodeField = screen.getByTestId(
+        "UCSBDiningCommonsMenuItemForm-diningCommonsCode",
+      );
+      const nameField = screen.getByTestId(
+        "UCSBDiningCommonsMenuItemForm-name",
+      );
+      const stationField = screen.getByTestId(
+        "UCSBDiningCommonsMenuItemForm-station",
+      );
+      const submitButton = screen.getByTestId(
+        "UCSBDiningCommonsMenuItemForm-submit",
+      );
 
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
@@ -135,7 +149,6 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
 
       expect(submitButton).toHaveTextContent("Update");
 
-      
       fireEvent.change(diningCommonsCodeField, {
         target: { value: "Ortega 2" },
       });
@@ -152,7 +165,9 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
         "UCSBDiningCommonsMenuItem Updated - id: 17 diningCommonsCode: Ortega 2",
       );
 
-      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonsmenuitems" });
+      expect(mockNavigate).toBeCalledWith({
+        to: "/ucsbdiningcommonsmenuitems",
+      });
 
       expect(axiosMock.history.put.length).toBe(1); // times called
       expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
@@ -163,7 +178,9 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
           station: "Entree 2",
         }),
       ); // posted object
-      expect(mockNavigate).toBeCalledWith({ to: "/ucsbdiningcommonsmenuitems" });
+      expect(mockNavigate).toBeCalledWith({
+        to: "/ucsbdiningcommonsmenuitems",
+      });
     });
   });
 });
