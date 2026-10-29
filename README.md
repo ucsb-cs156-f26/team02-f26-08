@@ -4,8 +4,8 @@ Instructions: <https://ucsb-cs156.github.io/f26/lab/team02.html>
 
 Deployments:
 
-* Prod: <https://team02-f26-08.dokku-08.cs.ucsb.edu>
-* QA: <https://team02-f26-08-qa.dokku-08.cs.ucsb.edu>
+* Prod: <https://team02.dokku-08.cs.ucsb.edu>
+* QA: <https://team02-qa.dokku-08.cs.ucsb.edu>
 
 | Table                     | Name         | Github Id |
 |---------------------------|--------------|-----------|
