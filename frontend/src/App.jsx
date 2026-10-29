@@ -15,6 +15,10 @@ import HelpRequestIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage"
 import HelpRequestCreatePage from "main/pages/HelpRequests/HelpRequestsCreatePage";
 import HelpRequestEditPage from "main/pages/HelpRequests/HelpRequestsEditPage";
 
+import MenuItemReviewIndexPage from "main/pages/MenuItemReviews/MenuItemReviewIndexPage";
+import MenuItemReviewCreatePage from "main/pages/MenuItemReviews/MenuItemReviewCreatePage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReviews/MenuItemReviewEditPage";
+
 import PlaceholderIndexPage from "main/pages/Placeholder/PlaceholderIndexPage";
 import PlaceholderCreatePage from "main/pages/Placeholder/PlaceholderCreatePage";
 import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
