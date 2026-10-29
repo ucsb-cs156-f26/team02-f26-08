@@ -94,11 +94,10 @@ describe("ArticlesIndexPage tests", () => {
       "4",
     );
 
-    const createRestaurantButton = screen.queryByText("Create Restaurant");
-    expect(createRestaurantButton).not.toBeInTheDocument();
+    const createArticleButton = screen.queryByText("Create Article");
+    expect(createArticleButton).not.toBeInTheDocument();
 
     articlesFixtures.threeArticles.forEach((article, index) => {
-
       expect(
         screen.getByTestId(`${testId}-cell-row-${index}-col-title`),
       ).toHaveTextContent(article.title);
