@@ -94,6 +94,9 @@ describe("ArticlesIndexPage tests", () => {
       "4",
     );
 
+    const createRestaurantButton = screen.queryByText("Create Restaurant");
+    expect(createRestaurantButton).not.toBeInTheDocument();
+
     articlesFixtures.threeArticles.forEach((article, index) => {
 
       expect(
