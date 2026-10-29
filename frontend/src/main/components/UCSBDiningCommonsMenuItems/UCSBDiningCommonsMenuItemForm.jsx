@@ -58,7 +58,7 @@ function UCSBDiningCommonsMenuItemForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="name">Name</Form.Label>
         <Form.Control
-          // data-testid={testIdPrefix + "-name"}
+          data-testid={testIdPrefix + "-name"}
           id="name"
           type="text"
           isInvalid={Boolean(errors.name)}
@@ -91,7 +91,9 @@ function UCSBDiningCommonsMenuItemForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">{buttonLabel}</Button>
+      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+        {buttonLabel}
+      </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
