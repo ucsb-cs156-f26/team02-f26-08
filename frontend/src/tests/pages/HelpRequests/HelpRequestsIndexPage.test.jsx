@@ -1,16 +1,28 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router";
+import mockConsole from "tests/testutils/mockConsole";
+import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import { expect } from "vitest";
+
+const mockToast = vi.fn();
+vi.mock("react-toastify", async (importOriginal) => {
+  const originalModule = await importOriginal();
+  return {
+    ...originalModule,
+    toast: vi.fn((x) => mockToast(x)),
+  };
+});
 
 describe("HelpRequestsIndexPage tests", () => {
   const axiosMock = new AxiosMockAdapter(axios);
+
+  const testId = "HelpRequestTable";
 
   const setupUserOnly = () => {
     axiosMock.reset();
@@ -23,13 +35,23 @@ describe("HelpRequestsIndexPage tests", () => {
       .reply(200, systemInfoFixtures.showingNeither);
   };
 
-  const queryClient = new QueryClient();
+  const setupAdminUser = () => {
+    axiosMock.reset();
+    axiosMock.resetHistory();
+    axiosMock
+      .onGet("/api/currentUser")
+      .reply(200, apiCurrentUserFixtures.adminUser);
+    axiosMock
+      .onGet("/api/systemInfo")
+      .reply(200, systemInfoFixtures.showingNeither);
+  };
 
-  test("Renders expected content", async () => {
-    // arrange
-    setupUserOnly();
+  test("Renders with Create Button for admin user", async () => {
+    setupAdminUser();
+    axiosMock.onGet("/api/helprequests/all").reply(200, []);
 
-    // act
+    const queryClient = new QueryClient();
+
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -38,23 +60,155 @@ describe("HelpRequestsIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
-    // assert
-    await screen.findByText("Index page not yet implemented");
+    await waitFor(() => {
+      expect(screen.getByText(/Create Help Request/)).toBeInTheDocument();
+    });
+
+    const button = screen.getByText(/Create Help Request/);
+    expect(button).toHaveAttribute("href", "/helprequests/create");
+    expect(button).toHaveAttribute("style", "float: right;");
+  });
+
+  test("renders three help requests correctly for regular user", async () => {
+    setupUserOnly();
+    axiosMock
+      .onGet("/api/helprequests/all")
+      .reply(200, helpRequestFixtures.threeHelpRequests);
+
+    const queryClient = new QueryClient();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <HelpRequestsIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toHaveTextContent("1");
+    });
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "3",
+    );
+
+    expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
+      "4",
+    );
+
+    const createHelpRequestButton = screen.queryByText("Create Help Request");
+    expect(createHelpRequestButton).not.toBeInTheDocument();
+
+    expect(screen.getByText("student1@ucsb.edu")).toBeInTheDocument();
 
     expect(
-      screen.getByText("Index page not yet implemented"),
+      screen.getByText("Need help debugging a Spring Boot controller."),
     ).toBeInTheDocument();
 
-    expect(screen.getByText("Create")).toBeInTheDocument();
-    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(
+      screen.getByText("Having trouble writing unit tests."),
+    ).toBeInTheDocument();
 
-    expect(screen.getByText("Create")).toHaveAttribute(
-      "href",
-      "/helprequests/create",
+    expect(
+      screen.getByText("Getting an error when connecting to the database."),
+    ).toBeInTheDocument();
+
+    // For non-admin users, Edit and Delete buttons should not be visible
+    expect(
+      screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`),
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`),
+    ).not.toBeInTheDocument();
+  });
+
+  test("renders empty table when backend unavailable, user only", async () => {
+    setupUserOnly();
+
+    axiosMock.onGet("/api/helprequests/all").timeout();
+
+    const restoreConsole = mockConsole();
+    const queryClient = new QueryClient();
+
+    try {
+      render(
+        <QueryClientProvider client={queryClient}>
+          <MemoryRouter>
+            <HelpRequestsIndexPage />
+          </MemoryRouter>
+        </QueryClientProvider>,
+      );
+
+      await waitFor(() => {
+        expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
+      });
+
+      await waitFor(() => {
+        expect(console.error).toHaveBeenCalled();
+      });
+
+      const errorMessage = console.error.mock.calls[0][0];
+      expect(errorMessage).toMatch(
+        "Error communicating with backend via GET on /api/helprequests/all",
+      );
+    } finally {
+      restoreConsole();
+    }
+  });
+
+  test("what happens when you click delete, admin", async () => {
+    setupAdminUser();
+
+    axiosMock
+      .onGet("/api/helprequests/all")
+      .reply(200, helpRequestFixtures.threeHelpRequests);
+
+    axiosMock
+      .onDelete("/api/helprequests")
+      .reply(200, "Help Request with id 1 was deleted");
+
+    const queryClient = new QueryClient();
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <HelpRequestsIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
     );
-    expect(screen.getByText("Edit")).toHaveAttribute(
-      "href",
-      "/helprequests/edit/1",
+
+    await waitFor(() => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-id`),
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
     );
+
+    const deleteButton = screen.getByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
+    expect(deleteButton).toBeInTheDocument();
+
+    fireEvent.click(deleteButton);
+
+    await waitFor(() => {
+      expect(mockToast).toHaveBeenCalledWith(
+        "Help Request with id 1 was deleted",
+      );
+    });
+
+    await waitFor(() => {
+      expect(axiosMock.history.delete.length).toBe(1);
+    });
+
+    expect(axiosMock.history.delete[0].url).toBe("/api/helprequests");
+    expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });
