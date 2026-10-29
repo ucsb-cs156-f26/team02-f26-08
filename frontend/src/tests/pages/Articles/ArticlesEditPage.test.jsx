@@ -95,7 +95,9 @@ describe("ArticlesEditPage tests", () => {
   });
 
   test("populates the form and sends the edited article with PUT", async () => {
-    axiosMock.onGet("/api/articles", { params: { id: 17 } }).reply(200, initialArticle);
+    axiosMock
+      .onGet("/api/articles", { params: { id: 17 } })
+      .reply(200, initialArticle);
     axiosMock.onPut("/api/articles").reply(200, updatedArticle);
 
     renderPage();
@@ -118,14 +120,20 @@ describe("ArticlesEditPage tests", () => {
 
     fireEvent.change(titleField, { target: { value: updatedArticle.title } });
     fireEvent.change(urlField, { target: { value: updatedArticle.url } });
-    fireEvent.change(explanationField, { target: { value: updatedArticle.explanation } });
+    fireEvent.change(explanationField, {
+      target: { value: updatedArticle.explanation },
+    });
     fireEvent.change(emailField, { target: { value: updatedArticle.email } });
-    fireEvent.change(dateAddedField, { target: { value: updatedArticle.dateAdded } });
+    fireEvent.change(dateAddedField, {
+      target: { value: updatedArticle.dateAdded },
+    });
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(mockToast).toHaveBeenCalledWith(
-      "Article Updated - id: 17 title: Updated Article",
-    ));
+    await waitFor(() =>
+      expect(mockToast).toHaveBeenCalledWith(
+        "Article Updated - id: 17 title: Updated Article",
+      ),
+    );
     expect(mockNavigate).toHaveBeenCalledWith({ to: "/articles" });
     expect(axiosMock.history.put).toHaveLength(1);
     expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
@@ -139,7 +147,9 @@ describe("ArticlesEditPage tests", () => {
   });
 
   test("changes when you click Update", async () => {
-    axiosMock.onGet("/api/articles", { params: { id: 17 } }).reply(200, initialArticle);
+    axiosMock
+      .onGet("/api/articles", { params: { id: 17 } })
+      .reply(200, initialArticle);
     axiosMock.onPut("/api/articles").reply(200, updatedArticle);
 
     renderPage();
@@ -151,9 +161,11 @@ describe("ArticlesEditPage tests", () => {
     fireEvent.change(titleField, { target: { value: "Updated Article" } });
     fireEvent.click(submitButton);
 
-    await waitFor(() => expect(mockToast).toHaveBeenCalledWith(
-      "Article Updated - id: 17 title: Updated Article",
-    ));
+    await waitFor(() =>
+      expect(mockToast).toHaveBeenCalledWith(
+        "Article Updated - id: 17 title: Updated Article",
+      ),
+    );
     expect(mockNavigate).toHaveBeenCalledWith({ to: "/articles" });
   });
 });
