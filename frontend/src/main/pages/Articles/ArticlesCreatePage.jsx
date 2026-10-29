@@ -13,14 +13,12 @@ export default function ArticlesCreatePage({ storybook = false }) {
       url: article.url,
       explanation: article.explanation,
       email: article.email,
-      dateAdded: article.dateAdded
+      dateAdded: article.dateAdded,
     },
   });
 
   const onSuccess = (article) => {
-    toast(
-      `New article Created - id: ${article.id} title: ${article.title}`,
-    );
+    toast(`New article Created - id: ${article.id} title: ${article.title}`);
   };
 
   const mutation = useBackendMutation(

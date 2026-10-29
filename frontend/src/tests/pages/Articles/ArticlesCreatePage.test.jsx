@@ -107,7 +107,9 @@ describe("ArticlesCreatePage tests", () => {
 
     fireEvent.change(titleInput, { target: { value: article.title } });
     fireEvent.change(urlInput, { target: { value: article.url } });
-    fireEvent.change(explanationInput, { target: { value: article.explanation } });
+    fireEvent.change(explanationInput, {
+      target: { value: article.explanation },
+    });
     fireEvent.change(emailInput, { target: { value: article.email } });
     fireEvent.change(dateInput, { target: { value: article.dateAdded } });
 
