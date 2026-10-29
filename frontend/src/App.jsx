@@ -122,6 +122,9 @@ function App() {
             exact
             path="/helprequests"
             element={<HelpRequestIndexPage />}
+          />
+          <Route
+            exact
             path="/RECOMMENDATIONREQUESTS"
             element={<RecommendationRequestsIndexPage />}
           />
@@ -138,6 +141,9 @@ function App() {
             exact
             path="/helprequests/create"
             element={<HelpRequestCreatePage />}
+          />
+          <Route
+            exact
             path="/RECOMMENDATIONREQUESTS/edit/:id"
             element={<RecommendationRequestsEditPage />}
           />
