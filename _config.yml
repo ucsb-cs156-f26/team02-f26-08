@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: []
+pull_requests: [{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-ucsborganization-integration-tests","number":246,"title":"Add integration tests for UCSBOrganization","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/246"}]
