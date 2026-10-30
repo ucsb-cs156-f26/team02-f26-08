@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDOC5bLlg","is_bot":false,"login":"jmkai","name":""},"headRefName":"jm-jpa04","number":249,"title":"jm - rec req integration test","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/249"},{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-ucsborganization-integration-tests","number":246,"title":"Add integration tests for UCSBOrganization","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/246"}]
+pull_requests: [{"author":{"id":"U_kgDODf-SIw","is_bot":false,"login":"celinezhao7","name":"Celine Zhao"},"headRefName":"celine-ucsborganization-integration-tests","number":246,"title":"Add integration tests for UCSBOrganization","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/246"}]
