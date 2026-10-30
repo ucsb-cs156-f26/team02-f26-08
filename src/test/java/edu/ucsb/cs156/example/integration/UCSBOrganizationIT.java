@@ -7,7 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ucsb.cs156.example.entities.Restaurant;
-import edu.ucsb.cs156.example.repositories.UCSBOrganizationRepository;
+import edu.ucsb.cs156.example.entities.UCSBOrganizations;
+import edu.ucsb.cs156.example.repositories.UCSBOrganizationsRepository;
 import edu.ucsb.cs156.example.repositories.UserRepository;
 import edu.ucsb.cs156.example.services.CurrentUserService;
 import edu.ucsb.cs156.example.services.GrantedAuthoritiesService;
@@ -38,7 +39,7 @@ public class UCSBOrganizationIT {
 
   @Autowired public GrantedAuthoritiesService grantedAuthoritiesService;
 
-  @Autowired UCSBOrganizationRepository ucsborganizationRepository;
+  @Autowired UCSBOrganizationsRepository ucsborganizationRepository;
 
   @Autowired public MockMvc mockMvc;
 
@@ -51,8 +52,13 @@ public class UCSBOrganizationIT {
   public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
     // arrange
 
-    Restaurant ucsborganization =
-        Restaurant.builder().name("Taco Bell").description("Mexican").build();
+    UCSBOrganizations ucsborganization =
+        UCSBOrganizations.builder()
+            .orgCode("TACO")
+            .orgTranslationShort("TACO")
+            .orgTranslation("Taco Club")
+            .inactive(false)
+            .build();
 
     ucsborganizationRepository.save(ucsborganization);
 
