@@ -2,11 +2,12 @@ package edu.ucsb.cs156.example.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.ucsb.cs156.example.entities.Restaurant;
 import edu.ucsb.cs156.example.entities.UCSBOrganizations;
 import edu.ucsb.cs156.example.repositories.UCSBOrganizationsRepository;
 import edu.ucsb.cs156.example.repositories.UserRepository;
@@ -35,6 +36,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @Import(TestConfig.class)
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class UCSBOrganizationIT {
+
   @Autowired public CurrentUserService currentUserService;
 
   @Autowired public GrantedAuthoritiesService grantedAuthoritiesService;
@@ -50,7 +52,6 @@ public class UCSBOrganizationIT {
   @WithMockUser(roles = {"USER"})
   @Test
   public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
-    // arrange
 
     UCSBOrganizations ucsborganization =
         UCSBOrganizations.builder()
@@ -62,35 +63,47 @@ public class UCSBOrganizationIT {
 
     ucsborganizationRepository.save(ucsborganization);
 
-    // act
     MvcResult response =
-        mockMvc.perform(get("/api/ucsborganizations?id=1")).andExpect(status().isOk()).andReturn();
+        mockMvc
+            .perform(get("/api/ucsborganizations").param("orgCode", "TACO"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andReturn();
 
-    // assert
     String expectedJson = mapper.writeValueAsString(ucsborganization);
     String responseString = response.getResponse().getContentAsString();
+
     assertEquals(expectedJson, responseString);
   }
 
   @WithMockUser(roles = {"ADMIN", "USER"})
   @Test
   public void an_admin_user_can_post_a_new_ucsborganization() throws Exception {
-    // arrange
 
-    Restaurant ucsborganization1 =
-        Restaurant.builder().id(1L).name("Chipotle").description("Mexican").build();
+    UCSBOrganizations ucsborganization =
+        UCSBOrganizations.builder()
+            .orgCode("CHIP")
+            .orgTranslationShort("CHIP")
+            .orgTranslation("Chipotle Club")
+            .inactive(false)
+            .build();
 
-    // act
     MvcResult response =
         mockMvc
             .perform(
-                post("/api/ucsborganizations/post?name=Chipotle&description=Mexican").with(csrf()))
+                post("/api/ucsborganizations/post")
+                    .param("orgCode", "CHIP")
+                    .param("orgTranslationShort", "CHIP")
+                    .param("orgTranslation", "Chipotle Club")
+                    .param("inactive", "false")
+                    .with(csrf()))
+            .andDo(print())
             .andExpect(status().isOk())
             .andReturn();
 
-    // assert
-    String expectedJson = mapper.writeValueAsString(ucsborganization1);
+    String expectedJson = mapper.writeValueAsString(ucsborganization);
     String responseString = response.getResponse().getContentAsString();
+
     assertEquals(expectedJson, responseString);
   }
 }
