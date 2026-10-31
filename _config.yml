@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDOBrvATA","is_bot":false,"login":"s-kyli","name":"vq37"},"headRefName":"MIR-e2e-test","number":254,"title":"MIR e2e test","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/254"},{"author":{"id":"U_kgDOBrvATA","is_bot":false,"login":"s-kyli","name":"vq37"},"headRefName":"MIR-integration-tests","number":253,"title":"add integration tests for MenuItemReview controller endpoint","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/253"}]
+pull_requests: [{"author":{"id":"U_kgDOBrvATA","is_bot":false,"login":"s-kyli","name":"vq37"},"headRefName":"MIR-e2e-test","number":254,"title":"MIR e2e test","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/254"}]
