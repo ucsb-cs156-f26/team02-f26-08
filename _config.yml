@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-f26/team02-f26-08
 owner: ucsb-cs156-f26
 repo_name: team02-f26-08
-pull_requests: [{"author":{"id":"U_kgDODgtRxQ","is_bot":false,"login":"Suveda-S","name":""},"headRefName":"suveda-UCSBDiningCommonsMenuItem-integration-tests","number":255,"title":"suveda add integration tests for UCSBDiningCommonsMenuItems Controller Endpoints","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/255"}]
+pull_requests: [{"author":{"id":"U_kgDODgtRxQ","is_bot":false,"login":"Suveda-S","name":""},"headRefName":"suveda-UCSBDiningCommonsMenuItem-e2e-tests","number":256,"title":"Suveda ucsb dining commons menu item e2e tests","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/256"},{"author":{"id":"U_kgDODgtRxQ","is_bot":false,"login":"Suveda-S","name":""},"headRefName":"suveda-UCSBDiningCommonsMenuItem-integration-tests","number":255,"title":"suveda add integration tests for UCSBDiningCommonsMenuItems Controller Endpoints","url":"https://github.com/ucsb-cs156-f26/team02-f26-08/pull/255"}]
